@@ -13,8 +13,8 @@ type RedisConn struct {
 
 var redisClient *redis.Client
 
-func (r *RedisConn) New(addr string) error {
-	r.Conn = redis.NewClient(&redis.Options{
+func New(addr string) (*RedisConn, error) {
+	conn := redis.NewClient(&redis.Options{
 		Addr:       addr,
 		PoolSize:   100,
 		MaxRetries: 2,
@@ -22,13 +22,15 @@ func (r *RedisConn) New(addr string) error {
 		DB:         0,
 	})
 
-	ping, err := r.Conn.Ping().Result()
+	ping, err := conn.Ping().Result()
 	if err == nil && len(ping) > 0 {
 		println("Connected to Redis")
 	} else {
 		println("Redis Connection Failed")
 	}
-	return err
+	return &RedisConn{
+		Conn: conn,
+	}, err
 }
 
 func (r *RedisConn) GetValue(key string) (interface{}, error) {
