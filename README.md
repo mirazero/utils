@@ -4,7 +4,8 @@
 2. gcc compiler인 tdm64-gcc-10.3.0-2.exe 설치
 3. pkg-config_0.26-1_win32, gettext-runtime_0.18.1.1-2_win32, glib_2.28.8-1_win32 를 위 gcc 컴파일러 bin 폴더에 복사
 4. oci8.pc 파일 생성하고, D:\pkg-config\bin 에 복사
-~~
+
+<pre><code>
 ora=D:/instantclient_12_1
 gcc=D:/gcc/TDM-GCC-64
 
@@ -24,7 +25,8 @@ Version: 12.1
 Libs: -L${oralib} -L${gcclib} -loci
 Libs.private: 
 Cflags: -I${orainclude} -I${gccinclude}
-~~
+</code></pre>
+
 5. 사용자 변수
   - path에 D:\instantclient_12_1, D:\pkg-config\bin, D:\gcc\TDM-GCC-64\bin 추가
   - PKG_CONFIG_PATH = D:\pkg-config\bin 추가
